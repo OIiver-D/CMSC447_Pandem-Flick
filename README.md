@@ -1,2 +1,2 @@
-# CMSC447_Group1
+# CMSC447 Pandem-Flick Discord Bot
 Movie Bot
