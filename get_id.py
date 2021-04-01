@@ -7,7 +7,7 @@ def get_id(title):
     conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")
 
     headers = {
-        'x-rapidapi-key': "d8636faa8fmsh783aacbb586ca61p118b3cjsn4260967350bc",
+        'x-rapidapi-key': "",
         'x-rapidapi-host': "imdb8.p.rapidapi.com"
         }
     title=title.replace(" ", "%20")
