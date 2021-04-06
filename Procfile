@@ -1,0 +1,1 @@
+woker: python PandemFlick.py
