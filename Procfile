@@ -1,1 +1,1 @@
-woker: python PandemFlick.py
+worker: python PandemFlick.py
