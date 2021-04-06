@@ -1,8 +1,8 @@
 import discord
 import os
-from TOKENFILE import TOKEN
 from discord.ext import commands
 
+TOKEN - os.environ.get('BOT')
 #if the '@' is first, bot will register the message as a command
 client = commands.Bot(command_prefix = '@')
 #deleting the default 'help' command lets us create our own
