@@ -49,6 +49,6 @@ async def refresh(ctx):
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
-
+TOKEN = os.environ.get('BOT', None)
 #starts the bot, using TOKEN stored in BOT_TOKEN.py
 client.run(TOKEN)
