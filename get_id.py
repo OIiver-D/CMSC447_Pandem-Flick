@@ -1,13 +1,13 @@
 import http.client
 import string
 import json
-
+import os
 #Sets up HTTPS connection
 def get_id(title):
     conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")
-
+    TOKEN = os.environ.get('IMDb',None)
     headers = {
-        'x-rapidapi-key': "",
+        'x-rapidapi-key': TOKEN,
         'x-rapidapi-host': "imdb8.p.rapidapi.com"
         }
     title=title.replace(" ", "%20")
