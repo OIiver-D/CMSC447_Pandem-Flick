@@ -46,6 +46,35 @@ class addList(commands.Cog):
         else:
             await ctx.send("Sorry, that movie cannot be found")
 
+    @commands.command(pass_context=True)    
+    async def delList(self,ctx):
+        if " " in ctx.message.content:
+            movie_title = " ".join(ctx.message.content.split()[1:])
 
+        user_id = str(ctx.message.author.id)
+        collection = db[user_id]
+        #call getData from getData.py 
+        movie_id = get_id(movie_title)
+        if movie_id != -1:
+            for i in collection.find():
+                if i['_id'] == movie_id:
+                    movie_title = i['movie_title']
+                    collection.delete_one(i)
+                    await ctx.send("Deleting `"+movie_title+" from user list")
+        await ctx.send("That movie was not in your list")
+
+    @commands.command(pass_context=True)    
+    async def showList(self,ctx):
+        user_id = str(ctx.message.author.id)
+        collection = db[user_id]
+        movies = ""
+        movie_num = 1
+        for i in collection.find():
+            movies += str(movie_num) +": " +i['movie_title']+"\n"
+            movie_num += 1
+        embed = discord.Embed(title = ctx.message.author.display_name +"'s Movie List",
+                                description = movies,
+                                color = 0xFF0000)
+        await ctx.send(embed=embed)
 def setup(client):
     client.add_cog(addList(client))
