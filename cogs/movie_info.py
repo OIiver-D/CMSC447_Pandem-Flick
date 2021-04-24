@@ -33,7 +33,7 @@ class movie_info(commands.Cog):
     @commands.command(pass_context=True)
     async def embed(self, ctx, *, message):
 
-        cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority"))
+        cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
 
         # assigns database
         db = cluster.MovieCache
