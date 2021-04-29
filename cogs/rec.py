@@ -1,23 +1,17 @@
 import discord
 from discord.ext import commands 
 from discord.utils import get
+from get_id import get_id
 import pandas as pd
 import numpy as np
 import pymongo
+import json
 
 cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
 db = cluster.UserLists
 
-user_id = "140511141062246400"
-collection = db[user_id]
-movie = list(collection.aggregate([{ "$sample": { "size": 1 } }]))
-movie = movie[0]
-print(movie['movie_title'])
-
 movies_df = pd.read_csv("movies.csv")
 ratings_df = pd.read_csv("ratings.csv")
-
-print(movies_df.head())
 
 #adds column with release year removed
 #ex (Toy Story (1995) -> Toy Story)
@@ -69,6 +63,13 @@ def recommend(user_input):
     else:
         return -1
 
+def fix_title(title):
+    fix = ", The"
+    if(title.startswith("The")):
+        new_title = title[4:] + fix
+        return new_title
+    return title
+    
 
 class rec(commands.Cog):
 
@@ -81,7 +82,46 @@ class rec(commands.Cog):
 
     @commands.command(pass_context=True)    
     async def rec(self, ctx):
-        print()
+
+        #recommendation by title
+        if " " in ctx.message.content:
+            movie_title = " ".join(ctx.message.content.split()[1:])
+            await ctx.send("Title: " + movie_title)
+
+        #recommendation by user list
+        else:
+            user_id = str(ctx.message.author.id)
+            #user_id = "140511141062246400"
+            #the user has a list
+            if (user_id in db.list_collection_names()):
+                
+                #grabs random movie from user list
+                collection = db[user_id]
+                movie_data = list(collection.aggregate([{ "$sample": { "size": 1 } }]))
+
+                #convert to json, pull movie title out of dict
+                movie_data = json.dumps(movie_data)
+                index = movie_data.find("movie_title")
+                movie_title = movie_data[index+15:]
+                index = movie_title.find('"')
+                movie_title = movie_title[:index]
+                
+                #fixes inaccuracy in data set
+                db_title = fix_title(movie_title)
+                 
+
+            #the user doesn't have a watch list
+            else:
+                await ctx.send("No watch list found for you. Try adding some movies with '@addList' so I can make a recommendation!")
+        
+
+    @commands.command(pass_context=True)    
+    async def rec_help(self, ctx):
+        help_msg = discord.Embed(title="Movie Recommendation Help!", color=0xFF5733)
+        help_msg.add_field(name="Recommend from User List", value="Just type '@rec' and I'll recommend movies based off of your list!", inline=False)
+        help_msg.add_field(name="Recommend from Movie Title", value="Just type '@rec 'title'' and I'll recommend some similar movies!\n" +
+        "Please make sure to type the movie title as it appears on IMDb!")
+        await ctx.send(embed=help_msg)
         
 
 def setup(client):
