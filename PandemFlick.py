@@ -50,7 +50,8 @@ for filename in os.listdir('./cogs'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
 #Gets key that is on Heroku 
-TOKEN = os.environ.get('BOT', None)
+#
+# TOKEN = os.environ.get('BOT', None)
 #starts the bot, using TOKEN stored in BOT_TOKEN.py
 client.run(TOKEN)
 

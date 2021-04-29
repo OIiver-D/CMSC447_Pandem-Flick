@@ -31,7 +31,7 @@ def get_ratings(movie_id):
     # This converts json into dictionary to use in python
     res = conn.getresponse()
     data = json.loads(res.read().decode("utf-8"))
-    print(data)
+    #print(data)
     rating = data['rating']
     # print(rating)
 
@@ -63,13 +63,11 @@ def get_genres(_id):
 
 
 def get_plot(_id):
-
-
     conn.request("GET", "/title/get-plots?tconst=" + _id, headers=headers)
     # This converts json into dictionary to use in python
     res = conn.getresponse()
     data = json.loads(res.read().decode("utf-8"))
-    print(data)
+    #print(data)
     plot = data['plots'][0]['text']
 
     return plot
