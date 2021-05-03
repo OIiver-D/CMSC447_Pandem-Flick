@@ -1,20 +1,12 @@
-import discord
 import os
 
-from discord.ext import commands
-from BOT_TOKEN import TOKEN
+from discord.ext import commands, tasks
+from pymongo import MongoClient
+from BOT_TOKENcopy import TOKEN
 
-
-TOKEN - os.environ.get('BOT')
-#if the '@' is first, bot will register the message as a command
-client = commands.Bot(command_prefix = '@')
-#deleting the default 'help' command lets us create our own
-
-# TOKEN - os.environ.get('BOT')
 # if the '@' is first, bot will register the message as a command
-client = commands.Bot(command_prefix='@')
+client = commands.Bot(command_prefix='!')
 # deleting the default 'help' command lets us create our own
-
 client.remove_command('help')
 
 
@@ -65,12 +57,32 @@ for filename in os.listdir('./cogs'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
 
-#TOKEN = os.environ.get('BOT', None)
 
-#starts the bot, using TOKEN stored in BOT_TOKEN.py
 
+
+@client.event
+async def on_ready():
+    clear_cache.start()
+
+
+@tasks.loop(hours=24)
+async def clear_cache():
+    await client.wait_until_ready()
+
+    cluster = MongoClient(
+        "mongodb+srv://pfAdmin:ZZ68174@cluster0.pdcfd.mongodb.net/PandemFlickBot?retryWrites=true&w=majority")
+    db = cluster["PandemFlickBot"]
+    collection = db["movies"]
+
+    if not client.is_closed():
+        collection.delete_many({})
+        ctx = client.get_channel(828728522029400068)
+        print("Cache cleared.")
+
+
+# Gets key that is on Heroku
+#
 # TOKEN = os.environ.get('BOT', None)
-
 # starts the bot, using TOKEN stored in BOT_TOKEN.py
 
 client.run(TOKEN)
