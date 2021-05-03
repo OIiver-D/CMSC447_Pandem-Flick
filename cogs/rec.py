@@ -86,11 +86,6 @@ def fix_recs(rec_list):
                 rec_list[i] = fixed_title
 
 def embed_rec(title, rec_list):
-    movie1_id = get_id(rec_list[0])
-    movie2_id = get_id(rec_list[1])
-    movie3_id = get_id(rec_list[2])
-
-
     rec_msg = discord.Embed(title="Since you liked '" + title + "'", color=0xFF5733)
     rec_msg.add_field(name="Why not try...", value= "1. " + rec_list[0]  + "\n2. " + rec_list[1]+ "\n3. " + rec_list[2] +
     "\n\n Use '!search' to find out more information about these movies!")
