@@ -1,10 +1,9 @@
 import discord
 import os
-from TOKENFILE import TOKEN
 from discord.ext import commands
 
 #if the '@' is first, bot will register the message as a command
-client = commands.Bot(command_prefix = '@')
+client = commands.Bot(command_prefix = '!')
 #deleting the default 'help' command lets us create our own
 client.remove_command('help')
 
@@ -50,5 +49,9 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
+#Gets key that is on Heroku 
+#
+# TOKEN = os.environ.get('BOT', None)
 #starts the bot, using TOKEN stored in BOT_TOKEN.py
 client.run(TOKEN)
+

@@ -97,6 +97,13 @@ def embed_rec(title, rec_list):
 
     return rec_msg
 
+def fix_title(title):
+    fix = ", The"
+    if(title.startswith("The")):
+        new_title = title[4:] + fix
+        return new_title
+    return title
+    
 
 class rec(commands.Cog):
 
@@ -113,6 +120,7 @@ class rec(commands.Cog):
         #recommendation by title
         if " " in ctx.message.content:
             movie_title = " ".join(ctx.message.content.split()[1:])
+
             print("Title before: " + movie_title)
             movie_id = get_id(movie_title)
             # Makes sure a valid movie_id was found
@@ -127,6 +135,7 @@ class rec(commands.Cog):
         else:
             #user_id = str(ctx.message.author.id)
             user_id = "123"
+
             #the user has a list
             if (user_id in db.list_collection_names()):
                 
@@ -141,9 +150,17 @@ class rec(commands.Cog):
                 index = movie_title.find('"')
                 movie_title = movie_title[:index]
 
+
+                
+                #fixes inaccuracy in data set
+                db_title = fix_title(movie_title)
+                 
+
+
             #the user doesn't have a watch list
             else:
                 await ctx.send("No watch list found for you. Try adding some movies with '@addList' so I can make a recommendation!")
+
                 await ctx.send("Or you can also use '@rec 'title'' and get a recommendation from a specific movie!")
                 return
 
@@ -160,6 +177,7 @@ class rec(commands.Cog):
 
         msg = embed_rec(movie_title, rec_list)
         await ctx.send(embed=msg)
+
         
 
 def setup(client):
