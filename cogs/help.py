@@ -9,6 +9,7 @@ class help(commands.Cog):
     
     @commands.Cog.listener()
     async def on_ready(self):
+        await self.client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="all the movies"))
         print("help cog online.")
 
     @commands.command(pass_context=True)    
