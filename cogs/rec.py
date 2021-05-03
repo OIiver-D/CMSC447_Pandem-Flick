@@ -120,21 +120,18 @@ class rec(commands.Cog):
         #recommendation by title
         if " " in ctx.message.content:
             movie_title = " ".join(ctx.message.content.split()[1:])
-
-            print("Title before: " + movie_title)
             movie_id = get_id(movie_title)
             # Makes sure a valid movie_id was found
             if movie_id != -1:
                 movie_meta = get_meta(movie_id)
                 movie_title = movie_meta[movie_id]['title']['title']
-                print("The title is " + movie_title)
             else:
                 await ctx.send("Sorry, that movie cannot be found")
 
         #recommendation by user list
         else:
-            #user_id = str(ctx.message.author.id)
-            user_id = "123"
+            user_id = str(ctx.message.author.id)
+            #user_id = "123"
 
             #the user has a list
             if (user_id in db.list_collection_names()):
@@ -173,7 +170,6 @@ class rec(commands.Cog):
                 await ctx.send("Sorry! I wasn't able to find that movie.")
 
         fix_recs(rec_list)
-        print(rec_list)
 
         msg = embed_rec(movie_title, rec_list)
         await ctx.send(embed=msg)
