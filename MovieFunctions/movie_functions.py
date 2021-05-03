@@ -62,7 +62,6 @@ def get_id(title):
     res = conn.getresponse()
     data = json.loads(res.read().decode("utf-8"))
     movie_id = data['results'][0]['id'][7:-1]
-
     return movie_id
 
 
@@ -76,8 +75,6 @@ def get_genres(_id):
 
 
 def get_plot(_id):
-
-
     conn.request("GET", "/title/get-plots?tconst=" + _id, headers=headers)
     # This converts json into dictionary to use in python
     res = conn.getresponse()

@@ -24,8 +24,11 @@ class movie_info(commands.Cog):
         cluster = MongoClient(
             "mongodb+srv://pfAdmin:ZZ68174@cluster0.pdcfd.mongodb.net/PandemFlickBot?retryWrites=true&w=majority")
 
+        #cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
+
+
         # assigns database
-        db = cluster["PandemFlickBot"]
+        db = cluster.MovieCache
 
         # assigns collection (a minidatabase within the larger database)
         collection = db["movies"]

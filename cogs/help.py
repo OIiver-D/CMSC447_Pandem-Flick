@@ -9,6 +9,7 @@ class help(commands.Cog):
     
     @commands.Cog.listener()
     async def on_ready(self):
+        await self.client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="all the movies"))
         print("help cog online.")
 
     @commands.command(pass_context=True)    
@@ -17,6 +18,7 @@ class help(commands.Cog):
         embed = discord.Embed(title="Pandem-Flick: ", color=0xAC1ADC)
         embed = discord.Embed(title="Pandem-Flick Commands: ", color=0xAC1ADC)
         embed.set_thumbnail(url="https://i.ibb.co/PG5kFmd/Pandem-Flick-Logocopy.png")
+        embed = discord.Embed(title="Pandem-Flick Commands: ", color=0xAC1ADC)
         embed.add_field(name="!addEvent mm/dd/yyyy 12:00[am/pm] [Event Name]", value=" Creates a watchtime event.\
                                  \n Example: @addEvent 5/1/2021 1:30pm Example Watch Party", inline=False)
         embed.add_field(name="!addList [Movie Title]", value=" Adds the specified movie to the users watchlist", inline=False)
@@ -25,6 +27,7 @@ class help(commands.Cog):
         embed.add_field(name="!info [Movie Title]",
                         value="You can use this command to get info about TV shows and movies. Example: @info Game of Thrones ",
                         inline=False)
+
 
         await ctx.send(embed=embed)
 
