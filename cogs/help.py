@@ -17,8 +17,8 @@ class help(commands.Cog):
 
         embed = discord.Embed(title="Pandem-Flick: ", color=0xAC1ADC)
         embed = discord.Embed(title="Pandem-Flick Commands: ", color=0xAC1ADC)
-        embed.add_field(name="!search [Movie Title]",value="Retrieves and displays information about a specified movie.\
-                            \n Example: @!search [Movie]",inline=False)
+        embed.add_field(name="!info [Movie Title]",value="Retrieves and displays information about a specified movie.\
+                            \n Example: @!info [Movie]",inline=False)
 
         embed.add_field(name="!addEvent mm/dd/yyyy 12:00[am/pm] [Event Name]", value=" Creates a watchtime event.\
                             \n Example: @addEvent 5/1/2021 1:30pm Example Watch Party", inline=False)
