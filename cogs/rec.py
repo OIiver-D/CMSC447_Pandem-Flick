@@ -155,7 +155,7 @@ class rec(commands.Cog):
             db_title = fix_title(movie_title)
             rec_list = recommend(db_title)
             if(len(rec_list) == 0):
-                await ctx.send("Sorry! I wasn't able to find that movie.")
+                await ctx.send("I was unable to find that movie in the dataset to generate a recommendation.")
 
         fix_recs(rec_list)
 
