@@ -113,9 +113,15 @@ class sched(commands.Cog):
                         await new_channel.edit(topic = "For announcements about upcoming events")
                         channel = new_channel
                     
+                    time_event = i['time'].split(':')
+                    hour_event = int(time_event[0])
+                    if hour_event > 12:
+                        hour_event -= 12
+                    time_event = str(hour_event) + ":" + time_event[1]
+
                     # creates message to send to the event-announcements channel
                     embed = discord.Embed(title = i['event name'],
-                                description = "This event is happening at: "+i['time'],
+                                description = "This event is happening at: "+time_event,
                                 color = 0xFF0000)
                     await channel.send(embed=embed)
                     #await channel.send(server_id.default_role)
