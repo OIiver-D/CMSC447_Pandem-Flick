@@ -135,14 +135,7 @@ class rec(commands.Cog):
                 collection = db[user_id]
                 movie_data = list(collection.aggregate([{ "$sample": { "size": 1 } }]))
 
-                #convert to json, pull movie title out of dict
-                movie_data = json.dumps(movie_data)
-                index = movie_data.find("movie_title")
-                movie_title = movie_data[index+15:]
-                index = movie_title.find('"')
-                movie_title = movie_title[:index]
-
-
+                movie_title = movie_data[0]['movie_title']
                 
                 #fixes inaccuracy in data set
                 db_title = fix_title(movie_title)
