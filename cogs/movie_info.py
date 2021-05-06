@@ -42,7 +42,7 @@ class movie_info(commands.Cog):
         if isinstance(error, MissingRequiredArgument):
             await ctx.send("Please format your command correctly. !info \"Movie Title\"")
         else:
-            await ctx.send(error)
+            await ctx.send("Movie not found, please try again.")
 
 
 def setup(client):
