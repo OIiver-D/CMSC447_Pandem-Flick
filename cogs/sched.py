@@ -94,7 +94,7 @@ class sched(commands.Cog):
                 diff_time = diff_time.total_seconds()
                 
                 # Creates the time difference between now and the time of the event
-                diff_time = (diff_time / 60
+                diff_time = (diff_time / 60)
                 # if and hour or less until the event, will send a message
                 if diff_time <= 60:
 
@@ -117,11 +117,13 @@ class sched(commands.Cog):
                     hour_event = int(time_event[0])
                     if hour_event > 12:
                         hour_event -= 12
+                        am_pm = 'pm'
+                    am_pm = 'am'
                     time_event = str(hour_event) + ":" + time_event[1]
 
                     # creates message to send to the event-announcements channel
                     embed = discord.Embed(title = i['event name'],
-                                description = "This event is happening at: "+time_event,
+                                description = "This event is happening at: "+time_event + am_pm,
                                 color = 0xFF0000)
                     await channel.send(embed=embed)
                     await channel.send(server_id.default_role)
