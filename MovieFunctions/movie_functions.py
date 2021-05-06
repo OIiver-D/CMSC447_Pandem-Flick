@@ -1,8 +1,8 @@
 import http.client
-import string
 import json
 import discord
-
+import urllib.parse
+import re
 from MovieFunctions import movie_functions
 
 conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")
@@ -14,23 +14,27 @@ headers = {
 
 # Sets up HTTPS connection
 def get_data(title):
-    title = title.replace(" ", "%20")
-    title = title.replace("&", "%26")
+    title = urllib.parse.quote(title, safe='')
+    # title = title.replace(" ", "%20")
+    # title = title.replace("&", "%26")
     conn.request("GET", "/auto-complete?q=" + title, headers=headers)
     #
     # This converts json into dictionary to use in python
     res = conn.getresponse()
     data = json.loads(res.read().decode("utf-8"))
-    _id = data['d'][0]['id']
-    if _id[0:2] != "tt":
-        _id = get_id(title)
+    if 'd' in data.keys():
+        _id = data['d'][0]['id']
+        if _id[0:2] != "tt":
+            _id = get_id(title)
 
-    conn.request("GET", "/title/get-overview-details?tconst=" + _id + "&currentCountry=US",
-                 headers=headers)
+        conn.request("GET", "/title/get-overview-details?tconst=" + _id + "&currentCountry=US",
+                     headers=headers)
 
-    res1 = conn.getresponse()
+        res1 = conn.getresponse()
 
-    overview = json.loads(res1.read().decode("utf-8"))
+        overview = json.loads(res1.read().decode("utf-8"))
+    else:
+        data, overview = None, None
 
     return data, overview
 
@@ -41,16 +45,12 @@ def get_ratings(movie_id):
     # This converts json into dictionary to use in python
     res = conn.getresponse()
     data = json.loads(res.read().decode("utf-8"))
-    rating = data['rating']
-    # print(rating)
-
-
+    print(data)
 
     if "rating" in data:
         rating = data['rating']
     else:
         rating = "N/A"
-
 
     return rating
 
@@ -61,7 +61,9 @@ def get_id(title):
     # This converts json into dictionary to use in python
     res = conn.getresponse()
     data = json.loads(res.read().decode("utf-8"))
+    print(data)
     movie_id = data['results'][0]['id'][7:-1]
+
     return movie_id
 
 
@@ -70,6 +72,7 @@ def get_genres(_id):
     # This converts json into dictionary to use in python
     res = conn.getresponse()
     data = json.loads(res.read().decode("utf-8"))
+    print(data)
 
     return data
 
@@ -79,6 +82,7 @@ def get_plot(_id):
     # This converts json into dictionary to use in python
     res = conn.getresponse()
     data = json.loads(res.read().decode("utf-8"))
+    print(data)
     plot = data['plots'][0]['text']
 
     return plot
@@ -88,17 +92,22 @@ def search(query, collection):
     # searches for movie in database first
     # search only works for titles
     # ignores case, exact match
-    results = collection.find_one({"title": {"$regex": '^' + query + '$', "$options": 'i'}})
+    query1 = re.escape(query)
+    results = collection.find_one({"title": {"$regex": '^' + query1 + '$', "$options": 'i'}})
 
     if results is None:
         data, overview = movie_functions.get_data(query)
 
-        movie = assign(data, overview)
 
-        # checks if movie id is already in database before trying to add it
-        id_check = collection.find_one({'_id': movie['_id']})
-        if id_check is None:
-            collection.insert_one(movie)
+        if data is None and overview is None:
+            movie = None
+        else:
+            movie = assign(data, overview)
+
+            # checks if movie id is already in database before trying to add it
+            id_check = collection.find_one({'_id': movie['_id']})
+            if id_check is None:
+                collection.insert_one(movie)
     else:
 
         movie = {"_id": results['_id'],
@@ -173,7 +182,5 @@ def assign(data, overview):
     if 'image' in overview['title'].keys():
         movie['image_url'] = overview['title']['image']['url']
 
-
     return movie
-
 
