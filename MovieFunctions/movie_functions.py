@@ -121,7 +121,10 @@ def build_display(ctx, movie):
     embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
     if 'image_url' in movie.keys():
         embed.set_thumbnail(url=movie['image_url'])
-    embed.add_field(name="Plot", value=movie['plot'], inline=False)
+    if 'plot' in movie.keys():
+        embed.add_field(name="Plot", value=movie['plot'], inline=False)
+    else:
+        embed.add_field(name="Plot", value="N/A", inline=False)
     if 'rating' in movie.keys():
         embed.add_field(name="Rating", value=movie['rating'], inline=True)
     else:
