@@ -1,3 +1,4 @@
+import discord
 import os
 
 import pymongo
@@ -78,7 +79,6 @@ async def clear_cache():
         print("Cache cleared.")
 
 #Gets key that is on Heroku 
-#
 TOKEN = os.environ.get('BOT', None)
 #starts the bot, using TOKEN stored in BOT_TOKEN.py
 

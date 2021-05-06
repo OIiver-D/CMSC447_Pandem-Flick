@@ -86,11 +86,6 @@ def fix_recs(rec_list):
                 rec_list[i] = fixed_title
 
 def embed_rec(title, rec_list):
-    movie1_id = get_id(rec_list[0])
-    movie2_id = get_id(rec_list[1])
-    movie3_id = get_id(rec_list[2])
-
-
     rec_msg = discord.Embed(title="Since you liked '" + title + "'", color=0xFF5733)
     rec_msg.add_field(name="Why not try...", value= "1. " + rec_list[0]  + "\n2. " + rec_list[1]+ "\n3. " + rec_list[2] +
     "\n\n Use '!search' to find out more information about these movies!")
@@ -140,14 +135,7 @@ class rec(commands.Cog):
                 collection = db[user_id]
                 movie_data = list(collection.aggregate([{ "$sample": { "size": 1 } }]))
 
-                #convert to json, pull movie title out of dict
-                movie_data = json.dumps(movie_data)
-                index = movie_data.find("movie_title")
-                movie_title = movie_data[index+15:]
-                index = movie_title.find('"')
-                movie_title = movie_title[:index]
-
-
+                movie_title = movie_data[0]['movie_title']
                 
                 #fixes inaccuracy in data set
                 db_title = fix_title(movie_title)
@@ -167,7 +155,7 @@ class rec(commands.Cog):
             db_title = fix_title(movie_title)
             rec_list = recommend(db_title)
             if(len(rec_list) == 0):
-                await ctx.send("Sorry! I wasn't able to find that movie.")
+                await ctx.send("I was unable to find that movie in the dataset to generate a recommendation.")
 
         fix_recs(rec_list)
 

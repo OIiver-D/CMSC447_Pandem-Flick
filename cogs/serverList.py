@@ -63,7 +63,8 @@ class serverList(commands.Cog):
                         movie_title = i['movie_title']
                         collection.delete_one(i)
                         await ctx.send("Deleting `"+movie_title+" from server list")
-            await ctx.send("That movie was not in your list")
+            else:
+                await ctx.send("That movie was not in your list")
         else:
             await ctx.send("Please specify what movie you want to add")
 
