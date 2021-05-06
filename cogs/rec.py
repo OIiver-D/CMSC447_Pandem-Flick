@@ -122,6 +122,7 @@ class rec(commands.Cog):
                 movie_title = movie_meta[movie_id]['title']['title']
             else:
                 await ctx.send("Sorry, that movie cannot be found")
+                return
 
         #recommendation by user list
         else:
