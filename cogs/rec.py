@@ -133,14 +133,18 @@ class rec(commands.Cog):
                 
                 #grabs random movie from user list
                 collection = db[user_id]
-                movie_data = list(collection.aggregate([{ "$sample": { "size": 1 } }]))
-
-                movie_title = movie_data[0]['movie_title']
+                #check that there are movies in this user's list
+                if(collection.count() != 0):
+                    movie_data = list(collection.aggregate([{ "$sample": { "size": 1 } }]))
+                    
+                    #convert to json, pull movie title out of dict
+                    movie_title = movie_data[0]['movie_title']
                 
-                #fixes inaccuracy in data set
-                db_title = fix_title(movie_title)
-                 
-
+                #they have an empty user list  
+                else:
+                    await ctx.send("You dont have any movies on your list! Try adding some movies with '@addList' so I can make a recommendation!")
+                    await ctx.send("Or you can also use '@rec 'title'' and get a recommendation from a specific movie!")
+                    return
 
             #the user doesn't have a watch list
             else:
