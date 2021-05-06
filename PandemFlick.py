@@ -1,7 +1,10 @@
 import discord
 import os
+
+import pymongo
 from discord.ext import commands, tasks
 from pymongo import MongoClient
+
 
 # if the '@' is first, bot will register the message as a command
 client = commands.Bot(command_prefix='!')
@@ -61,9 +64,13 @@ async def on_ready():
 async def clear_cache():
     await client.wait_until_ready()
 
-    cluster = MongoClient(
-        "mongodb+srv://pfAdmin:ZZ68174@cluster0.pdcfd.mongodb.net/PandemFlickBot?retryWrites=true&w=majority")
-    db = cluster["PandemFlickBot"]
+    cluster = pymongo.MongoClient(
+        "mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
+
+    # assigns database
+    db = cluster.MovieCache
+
+    # assigns collection (a minidatabase within the larger database)
     collection = db["movies"]
 
     if not client.is_closed():

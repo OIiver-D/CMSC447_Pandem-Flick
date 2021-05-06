@@ -1,3 +1,4 @@
+import pymongo
 from discord.ext import tasks, commands
 from discord.ext.commands import MissingRequiredArgument
 from MovieFunctions import movie_functions
@@ -15,12 +16,10 @@ class movie_info(commands.Cog):
         print("movie info cog online")
 
     @commands.command(pass_context=True)
-    async def embed(self, ctx, *, message):
-        cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
 
-    @commands.command(pass_context=True)
     async def info(self, ctx, *, message):
-        cluster = MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
+
+        cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
 
         # assigns database
         db = cluster.MovieCache
