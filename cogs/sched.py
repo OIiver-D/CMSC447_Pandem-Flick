@@ -124,7 +124,7 @@ class sched(commands.Cog):
                                 description = "This event is happening at: "+time_event,
                                 color = 0xFF0000)
                     await channel.send(embed=embed)
-                    #await channel.send(server_id.default_role)
+                    await channel.send(server_id.default_role)
                     # removes the announced event since it won't be announced again
                     collection.remove({"_id":i['_id']})
 
