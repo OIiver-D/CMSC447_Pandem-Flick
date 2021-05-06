@@ -29,8 +29,13 @@ class movie_info(commands.Cog):
 
         movie = movie_functions.search(message, collection)
         embed = movie_functions.build_display(ctx, movie)
+        
+        if movie is None:
+            await ctx.send("Your search returned no results.")
+        else:
+            embed = movie_functions.build_display(ctx, movie)
+            await ctx.send(embed=embed)
 
-        await ctx.send(embed=embed)
 
     @info.error
     async def info_error(self, ctx, error):
