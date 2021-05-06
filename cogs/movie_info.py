@@ -35,7 +35,7 @@ class movie_info(commands.Cog):
     @info.error
     async def info_error(self, ctx, error):
         if isinstance(error, MissingRequiredArgument):
-            await ctx.send("Please format your command correctly. @info \"Movie Title\"")
+            await ctx.send("Please format your command correctly. !info \"Movie Title\"")
         else:
             await ctx.send(error)
 
