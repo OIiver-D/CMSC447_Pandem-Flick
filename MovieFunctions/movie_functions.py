@@ -26,6 +26,7 @@ def get_data(title):
         _id = data['d'][0]['id']
         if _id[0:2] != "tt":
             _id = get_id(title)
+            data['d'][0]['id'] = _id
 
         conn.request("GET", "/title/get-overview-details?tconst=" + _id + "&currentCountry=US",
                      headers=headers)
@@ -61,7 +62,6 @@ def get_id(title):
     # This converts json into dictionary to use in python
     res = conn.getresponse()
     data = json.loads(res.read().decode("utf-8"))
-    print(data)
     movie_id = data['results'][0]['id'][7:-1]
 
     return movie_id
@@ -72,7 +72,6 @@ def get_genres(_id):
     # This converts json into dictionary to use in python
     res = conn.getresponse()
     data = json.loads(res.read().decode("utf-8"))
-    print(data)
 
     return data
 
@@ -82,7 +81,6 @@ def get_plot(_id):
     # This converts json into dictionary to use in python
     res = conn.getresponse()
     data = json.loads(res.read().decode("utf-8"))
-    print(data)
     plot = data['plots'][0]['text']
 
     return plot
@@ -98,7 +96,6 @@ def search(query, collection):
     if results is None:
         data, overview = movie_functions.get_data(query)
 
-
         if data is None and overview is None:
             movie = None
         else:
@@ -110,16 +107,7 @@ def search(query, collection):
                 collection.insert_one(movie)
     else:
 
-        movie = {"_id": results['_id'],
-                 "title": results['title'],
-                 "category": results['category'],
-                 "genres": results['genres'],
-                 "rating": results['rating'],
-                 "web_url": results['web_url'],
-                 "image_url": results['image_url'],
-                 "time": results['time'],
-                 "plot": results['plot']
-                 }
+        movie = results
 
     return movie
 
@@ -183,4 +171,3 @@ def assign(data, overview):
         movie['image_url'] = overview['title']['image']['url']
 
     return movie
-
