@@ -81,8 +81,6 @@ class sched(commands.Cog):
             date_split = event_date.split('/')
             event_date = datetime(int(date_split[2]), int(date_split[0]), int(date_split[1]))
             curr_date = datetime(curr_dt.year, curr_dt.month, curr_dt.day)
-            print(event_date)
-            print(curr_date)
             # checks to see if there is a event that is happening today
             if curr_dt.date() == event_date.date():
 
