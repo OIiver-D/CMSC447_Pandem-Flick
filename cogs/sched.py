@@ -94,7 +94,7 @@ class sched(commands.Cog):
                 diff_time = diff_time.total_seconds()
                 
                 # Creates the time difference between now and the time of the event
-                diff_time = (diff_time % 3600) //60
+                diff_time = (diff_time / 60
                 # if and hour or less until the event, will send a message
                 if diff_time <= 60:
 
