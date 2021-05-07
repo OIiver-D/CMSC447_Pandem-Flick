@@ -1,18 +1,15 @@
 import discord
 from discord.ext import commands 
+from get_id import get_id
+from get_id import get_meta
 from discord.utils import get
 import http.client
 import json
 import random
 import pymongo
-from get_id import get_id
-from get_id import get_meta
 
-# CLUSTER = os.environ.get('MONGODB_URI', None)
-# cluster = pymongo.MongoClient(CLUSTER)
-
+#Like userList, but does server list instead
 cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
-
 db = cluster.ServerLists
 class serverList(commands.Cog):
     def __init__(self, client):
