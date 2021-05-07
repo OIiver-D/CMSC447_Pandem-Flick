@@ -9,8 +9,11 @@ from get_id import get_id
 from get_id import get_meta
 import os
 
-CLUSTER = os.environ.get('MONGODB_URI', None)
-cluster = pymongo.MongoClient(CLUSTER)
+# CLUSTER = os.environ.get('MONGODB_URI', None)
+# cluster = pymongo.MongoClient(CLUSTER)
+
+cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
+
 db = cluster.UserLists
 class userList(commands.Cog):
     def __init__(self, client):

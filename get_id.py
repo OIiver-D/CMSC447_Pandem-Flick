@@ -3,11 +3,11 @@ import string
 import json
 import os
 
-IMDB_KEY = os.environ.get('IMDb', None)
+# IMDB_KEY = os.environ.get('IMDb', None)
 #Sets up HTTPS connection
 conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")
 headers = {
-    'x-rapidapi-key': IMDB_KEY,
+    'x-rapidapi-key': "d8636faa8fmsh783aacbb586ca61p118b3cjsn4260967350bc",
     'x-rapidapi-host': "imdb8.p.rapidapi.com"
     }
 

@@ -11,8 +11,11 @@ import pymongo
 import os
 
 
-CLUSTER = os.environ.get('MONGODB_URI', None)
-cluster = pymongo.MongoClient(CLUSTER)
+# CLUSTER = os.environ.get('MONGODB_URI', None)
+# cluster = pymongo.MongoClient(CLUSTER)
+
+cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
+
 db = cluster.Events
 collection = db['Events']
 class sched(commands.Cog):

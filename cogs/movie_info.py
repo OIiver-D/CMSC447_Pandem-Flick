@@ -1,12 +1,15 @@
 import pymongo
-import os
 from discord.ext import tasks, commands
 from discord.ext.commands import MissingRequiredArgument
 from MovieFunctions import movie_functions
 from discord.ext import commands
 from pymongo import MongoClient
-CLUSTER = os.environ.get('MONGODB_URI', None)
-cluster = pymongo.MongoClient(CLUSTER)
+import os
+
+#CLUSTER = os.environ.get('MONGODB_URI', None)
+#cluster = pymongo.MongoClient(CLUSTER)
+
+cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
 
 class movie_info(commands.Cog):
 

@@ -9,9 +9,11 @@ import pymongo
 import json
 import os
 
-CLUSTER = os.environ.get('MONGODB_URI', None)
+# CLUSTER = os.environ.get('MONGODB_URI', None)
+# cluster = pymongo.MongoClient(CLUSTER)
 
-cluster = pymongo.MongoClient(CLUSTER)
+cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
+
 db = cluster.UserLists
 
 movies_df = pd.read_csv("movies.csv")

@@ -77,7 +77,8 @@ async def clear_cache():
         print("Cache cleared.")
 
 #Gets key that is on Heroku 
-TOKEN = os.environ.get('BOT', None)
+# TOKEN = os.environ.get('BOT', None)
+TOKEN = "ODExNDMzMjQ4MDAwOTY2Njg1.YCyIGg.8VdgagEH1EIBrkZ1qz8Jn0DQqtI"
 #starts the bot, using TOKEN stored in BOT_TOKEN.py
 
 client.run(TOKEN)
