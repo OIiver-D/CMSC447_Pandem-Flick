@@ -6,7 +6,7 @@ from MovieFunctions import movie_functions
 from discord.ext import commands
 from pymongo import MongoClient
 CLUSTER = os.environ.get('MONGODB_URI', None)
-cluster = CLUSTER
+cluster = pymongo.MongoClient(CLUSTER)
 
 class movie_info(commands.Cog):
 

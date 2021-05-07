@@ -11,7 +11,7 @@ import os
 
 CLUSTER = os.environ.get('MONGODB_URI', None)
 
-cluster = CLUSTER
+cluster = pymongo.MongoClient(CLUSTER)
 db = cluster.UserLists
 
 movies_df = pd.read_csv("movies.csv")

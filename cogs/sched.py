@@ -12,7 +12,7 @@ import os
 
 
 CLUSTER = os.environ.get('MONGODB_URI', None)
-cluster = CLUSTER
+cluster = pymongo.MongoClient(CLUSTER)
 db = cluster.Events
 collection = db['Events']
 class sched(commands.Cog):

@@ -9,7 +9,7 @@ from get_id import get_id
 from get_id import get_meta
 
 CLUSTER = os.environ.get('MONGODB_URI', None)
-cluster = CLUSTER
+cluster = pymongo.MongoClient(CLUSTER)
 db = cluster.UserLists
 class userList(commands.Cog):
     def __init__(self, client):
