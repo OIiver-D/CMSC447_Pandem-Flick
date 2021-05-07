@@ -8,8 +8,9 @@ import http.client
 import json
 import random
 import pymongo
-from PandemFlick import CLUSTER
 
+
+CLUSTER = os.environ.get('MONGODB_URI', None)
 cluster = CLUSTER
 db = cluster.Events
 collection = db['Events']

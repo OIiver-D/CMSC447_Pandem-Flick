@@ -7,7 +7,8 @@ import pandas as pd
 import numpy as np
 import pymongo
 import json
-from PandemFlick import CLUSTER
+
+CLUSTER = os.environ.get('MONGODB_URI', None)
 
 cluster = CLUSTER
 db = cluster.UserLists

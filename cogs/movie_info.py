@@ -5,7 +5,7 @@ from MovieFunctions import movie_functions
 from discord.ext import commands
 from pymongo import MongoClient
 
-from PandemFlick import CLUSTER
+CLUSTER = os.environ.get('MONGODB_URI', None)
 cluster = CLUSTER
 
 class movie_info(commands.Cog):

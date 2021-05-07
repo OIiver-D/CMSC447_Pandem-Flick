@@ -7,7 +7,7 @@ import http.client
 import json
 import random
 import pymongo
-from PandemFlick import CLUSTER
+CLUSTER = os.environ.get('MONGODB_URI', None)
 #Like userList, but does server list instead
 cluster = CLUSTER
 

@@ -4,7 +4,9 @@ import discord
 import urllib.parse
 import re
 from MovieFunctions import movie_functions
-from PandemFlick import IMDB_KEY
+
+
+IMDB_KEY = os.environ.get('IMDb', None)
 
 
 conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")

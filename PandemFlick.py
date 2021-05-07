@@ -1,13 +1,8 @@
 import discord
 import os
-
 import pymongo
 from discord.ext import commands, tasks
 from pymongo import MongoClient
-
-CLUSTER = os.environ.get('MONGODB_URI', None)
-IMDB_KEY = os.environ.get('IMDb', None)
-
 
 # if the '@' is first, bot will register the message as a command
 client = commands.Bot(command_prefix='!')
