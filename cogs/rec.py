@@ -150,7 +150,6 @@ class rec(commands.Cog):
             #the user doesn't have a watch list
             else:
                 await ctx.send("No watch list found for you. Try adding some movies with '@addList' so I can make a recommendation!")
-
                 await ctx.send("Or you can also use '@rec 'title'' and get a recommendation from a specific movie!")
                 return
 
@@ -161,6 +160,7 @@ class rec(commands.Cog):
             rec_list = recommend(db_title)
             if(len(rec_list) == 0):
                 await ctx.send("I was unable to find that movie in the dataset to generate a recommendation.")
+                return
 
         fix_recs(rec_list)
 
