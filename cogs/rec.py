@@ -7,7 +7,6 @@ import pandas as pd
 import numpy as np
 import pymongo
 import json
-import os
 
 # CLUSTER = os.environ.get('MONGODB_URI', None)
 # cluster = pymongo.MongoClient(CLUSTER)

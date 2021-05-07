@@ -4,7 +4,6 @@ from discord.ext.commands import MissingRequiredArgument
 from MovieFunctions import movie_functions
 from discord.ext import commands
 from pymongo import MongoClient
-import os
 
 #CLUSTER = os.environ.get('MONGODB_URI', None)
 #cluster = pymongo.MongoClient(CLUSTER)

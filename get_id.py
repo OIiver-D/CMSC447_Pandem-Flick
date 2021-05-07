@@ -1,7 +1,6 @@
 import http.client
 import string
 import json
-import os
 
 # IMDB_KEY = os.environ.get('IMDb', None)
 #Sets up HTTPS connection

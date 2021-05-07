@@ -7,7 +7,6 @@ import random
 import pymongo
 from get_id import get_id
 from get_id import get_meta
-import os
 
 # CLUSTER = os.environ.get('MONGODB_URI', None)
 # cluster = pymongo.MongoClient(CLUSTER)
