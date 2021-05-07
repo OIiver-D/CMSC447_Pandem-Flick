@@ -8,8 +8,8 @@ import json
 import random
 import pymongo
 
-
-cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
+from PandemFlick import CLUSTER
+cluster = CLUSTER
 db = cluster.UserLists
 class userList(commands.Cog):
     def __init__(self, client):

@@ -7,8 +7,9 @@ import pandas as pd
 import numpy as np
 import pymongo
 import json
+from PandemFlick import CLUSTER
 
-cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
+cluster = CLUSTER
 db = cluster.UserLists
 
 movies_df = pd.read_csv("movies.csv")

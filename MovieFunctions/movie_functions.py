@@ -4,10 +4,12 @@ import discord
 import urllib.parse
 import re
 from MovieFunctions import movie_functions
+from PandemFlick import IMDB_KEY
+
 
 conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")
 headers = {
-    'x-rapidapi-key': "7370d66108msh075650f3a47a6a8p148fb0jsne3f707ea2d26",
+    'x-rapidapi-key': IMDB_KEY,
     'x-rapidapi-host': "imdb8.p.rapidapi.com"
 }
 

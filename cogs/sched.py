@@ -8,8 +8,9 @@ import http.client
 import json
 import random
 import pymongo
+from PandemFlick import CLUSTER
 
-cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
+cluster = CLUSTER
 db = cluster.Events
 collection = db['Events']
 class sched(commands.Cog):
@@ -71,7 +72,7 @@ class sched(commands.Cog):
 
 
 
-    @tasks.loop(minutes=60)
+    @tasks.loop(seconds=60)
     async def check_event(self):
         await self.client.wait_until_ready()
         curr_dt = datetime.now()
@@ -126,7 +127,7 @@ class sched(commands.Cog):
                                 description = "This event is happening at: "+time_event + am_pm,
                                 color = 0xFF0000)
                     await channel.send(embed=embed)
-                    await channel.send(server_id.default_role)
+                    #await channel.send(server_id.default_role)
                     # removes the announced event since it won't be announced again
                     collection.remove({"_id":i['_id']})
 

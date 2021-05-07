@@ -7,9 +7,10 @@ import http.client
 import json
 import random
 import pymongo
-
+from PandemFlick import CLUSTER
 #Like userList, but does server list instead
-cluster = pymongo.MongoClient("mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
+cluster = CLUSTER
+
 db = cluster.ServerLists
 class serverList(commands.Cog):
     def __init__(self, client):

@@ -2,13 +2,11 @@ import http.client
 import string
 import json
 import os
-
+from PandemFlick import IMDB_KEY
 #Sets up HTTPS connection
 conn = http.client.HTTPSConnection("imdb8.p.rapidapi.com")
-#TOKEN = os.environ.get('IMDb',None)
-TOKEN = "d8636faa8fmsh783aacbb586ca61p118b3cjsn4260967350bc"
 headers = {
-    'x-rapidapi-key': TOKEN,
+    'x-rapidapi-key': IMDB_KEY,
     'x-rapidapi-host': "imdb8.p.rapidapi.com"
     }
 

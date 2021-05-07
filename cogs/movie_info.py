@@ -5,6 +5,8 @@ from MovieFunctions import movie_functions
 from discord.ext import commands
 from pymongo import MongoClient
 
+from PandemFlick import CLUSTER
+cluster = CLUSTER
 
 class movie_info(commands.Cog):
 
@@ -18,8 +20,7 @@ class movie_info(commands.Cog):
     @commands.command(pass_context=True)
     async def info(self, ctx, *, message):
 
-        cluster = pymongo.MongoClient(
-            "mongodb+srv://group1:group1@cluster0.yabgb.mongodb.net/PandemFlick?retryWrites=true&w=majority")
+        cluster = CLUSTER
 
         # assigns database
         db = cluster.MovieCache
