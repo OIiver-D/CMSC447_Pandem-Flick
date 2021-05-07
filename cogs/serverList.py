@@ -1,12 +1,13 @@
 import discord
 from discord.ext import commands 
-from get_id import get_id
-from get_id import get_meta
 from discord.utils import get
 import http.client
 import json
 import random
 import pymongo
+from get_id import get_id
+from get_id import get_meta
+
 CLUSTER = os.environ.get('MONGODB_URI', None)
 #Like userList, but does server list instead
 cluster = CLUSTER

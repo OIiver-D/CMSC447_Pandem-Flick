@@ -8,6 +8,7 @@ import http.client
 import json
 import random
 import pymongo
+import os
 
 
 CLUSTER = os.environ.get('MONGODB_URI', None)

@@ -4,7 +4,7 @@ import discord
 import urllib.parse
 import re
 from MovieFunctions import movie_functions
-
+import os
 
 IMDB_KEY = os.environ.get('IMDb', None)
 

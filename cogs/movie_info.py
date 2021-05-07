@@ -1,10 +1,10 @@
 import pymongo
+import os
 from discord.ext import tasks, commands
 from discord.ext.commands import MissingRequiredArgument
 from MovieFunctions import movie_functions
 from discord.ext import commands
 from pymongo import MongoClient
-
 CLUSTER = os.environ.get('MONGODB_URI', None)
 cluster = CLUSTER
 
