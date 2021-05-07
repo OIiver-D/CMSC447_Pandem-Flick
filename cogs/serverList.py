@@ -7,10 +7,12 @@ import random
 import pymongo
 from get_id import get_id
 from get_id import get_meta
+import os
 
 CLUSTER = os.environ.get('MONGODB_URI', None)
 #Like userList, but does server list instead
-cluster = CLUSTER
+cluster = pymongo.MongoClient(CLUSTER)
+
 
 db = cluster.ServerLists
 class serverList(commands.Cog):
