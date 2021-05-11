@@ -118,7 +118,8 @@ class sched(commands.Cog):
                     if hour_event > 12:
                         hour_event -= 12
                         am_pm = 'pm'
-                    am_pm = 'am'
+                    else:
+                        am_pm = 'am'
                     time_event = str(hour_event) + ":" + time_event[1]
 
                     # creates message to send to the event-announcements channel
